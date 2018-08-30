@@ -1,0 +1,16 @@
+public class Assign {
+
+	public static void main(String[] args) {
+		int x,y;
+		float z = 1.234f;
+		double w = 1.234;
+		boolean flag = true;
+		char c;
+		String str;
+		String str1 = "Hi";
+		c = 'A';
+		str = "bye";
+		x = 12;
+		y = 300;
+	}
+}
