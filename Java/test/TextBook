@@ -1,0 +1,237 @@
+package admin;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+public class TextBook extends Frame {
+	
+	public TextBook(String title) {
+		super(title);
+	}
+	
+	public static void main(String args[]) {
+		boolean save_flag = false;
+		
+		TextBook tb = new TextBook("记事本");//设置框架
+		TextField tf = new TextField(100);//文本域
+		
+		//设置菜单栏
+		MenuBar mb = new MenuBar();
+		tb.setMenuBar(mb);
+		Menu file = new Menu("File");
+		Menu edit = new Menu("Edit");
+		Menu options = new Menu("Options");
+		mb.add(file);
+		mb.add(edit);
+		mb.add(options);
+		
+		//子菜单栏
+		MenuItem Open_File = new MenuItem("Open File");
+		MenuItem Save_File = new MenuItem("Save File");
+		MenuItem Quit = new MenuItem("Quit");
+		MenuItem Copy= new MenuItem("Copy");
+		MenuItem Paste = new MenuItem("Paste");
+		MenuItem Help = new MenuItem("Help");
+		
+		file.add(Save_File);
+		file.add(Open_File);
+		file.add(Quit);
+		
+		edit.add(Copy);
+		edit.add(Paste);
+		
+		options.add(Help);
+		
+		tb.add(tf,BorderLayout.CENTER);//加入文本域
+		//设置大小及显示
+		tb.setSize(400,400);
+		tb.setVisible(true);
+		
+		//点击save到文件
+		Save_File.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent a) {
+				//获取内容
+				String s = tf.getText();
+				byte buffer[] = s.getBytes();
+				
+				//保存文件命名框
+				Frame Save_Frame = new Frame("Save File");
+				Save_Frame.setLayout(new FlowLayout());
+				//按钮
+				Button is_Saved = new Button("确定");
+				Button not_Saved = new Button("取消");
+					
+				TextField File_Name = new TextField(30);//命名框
+				
+				Save_Frame.add(new Label("输入文件名："));
+				Save_Frame.add(File_Name);
+				Save_Frame.add(is_Saved);
+				Save_Frame.add(not_Saved);
+				Save_Frame.setSize(360, 100);
+				Save_Frame.setVisible(true);
+					
+				is_Saved.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent a) {
+						if(File_Name.getText() == null) {
+							Frame No_Name = new Frame("文件未命名");
+							Button yes = new Button("Yes!");
+							Button no = new Button("No!");
+							No_Name.setLayout(new FlowLayout());
+								
+							No_Name.add(new Label("文件输入名不可为空！"));
+							No_Name.add(yes);
+							No_Name.add(no);
+							No_Name.setSize(180, 100);
+							No_Name.setVisible(true);
+								
+							yes.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent b) {
+									No_Name.setVisible(false);
+									No_Name.dispose();
+								}
+							});
+							
+							no.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent b) {
+									No_Name.setVisible(false);
+									No_Name.dispose();
+								}
+							});
+						}else {
+							String Name = File_Name.getText() + ".txt";
+							try{
+								FileOutputStream fs = new FileOutputStream(Name);
+								fs.write(buffer);
+								fs.close();
+							}catch(Exception e) {System.out.println(e);}
+						
+							//弹出提示框
+							Frame File_Save_Success = new Frame("保存成功！");
+							Button yes = new Button("Yes!");
+							Button no = new Button("No!");
+							File_Save_Success.setLayout(new FlowLayout());
+							
+							File_Save_Success.add(new Label("文件已保存！" + "\n" +"文件名为" + Name));
+							File_Save_Success.add(yes);
+							File_Save_Success.add(no);
+							File_Save_Success.setSize(180, 100);
+							File_Save_Success.setVisible(true);
+							
+							yes.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent b) {
+									File_Save_Success.setVisible(false);
+									File_Save_Success.dispose();
+								}
+							});
+							
+							no.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent b) {
+									File_Save_Success.setVisible(false);
+									File_Save_Success.dispose();
+								}
+							});
+						
+							File_Save_Success.addWindowListener(new WindowAdapter() {
+								public void windowClosing(WindowEvent w) {
+									File_Save_Success.setVisible(false);
+									File_Save_Success.dispose();
+								}
+							});
+														
+							Save_Frame.setVisible(false);
+						}
+					}
+				});
+					
+				not_Saved.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent a) {
+						System.out.println("文件未保存！");
+						Save_Frame.setVisible(false);
+						Save_Frame.dispose();
+					}
+				});
+					
+				Save_Frame.addWindowListener(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						e.getWindow().setVisible(false);
+						((Window)e.getComponent()).dispose();
+						//System.exit(0);
+					}
+				});
+			}
+		});
+		
+		//点击open打开现有文件内容到当前窗口
+		Open_File.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent a){
+				Frame Open_File = new Frame();
+				FileDialog fd = new FileDialog(Open_File,"Open File",FileDialog.LOAD);
+				fd.setVisible(true);
+				
+				try{
+					FileInputStream rf = new FileInputStream(fd.getFile());
+					int n = 1024,c = 0;
+					byte buffer[] = new byte[n];
+					while((c = rf.read(buffer,0,n)) != -1) {
+						tf.setText(new String(buffer,0,c));
+					}
+					rf.close();
+				}catch(IOException ioe)	{System.out.println(ioe);}
+				 catch(Exception e)	{System.out.println(e);}
+			}
+		});
+		
+		//点击Quit退出
+		Quit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent a) {
+				System.out.print("quit!");
+				tb.setVisible(false);
+				tb.dispose();
+				System.exit(0);
+			}
+		});
+		
+		//点击Help弹出提示
+		Help.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent a) {
+				Frame help = new Frame("Help");
+				Button yes = new Button("Yes");
+				Button no = new Button("No");
+				
+				help.setLayout(new FlowLayout());
+				
+				help.add(new Label("有啥意见尽管提："));
+				help.add(yes);
+				help.add(no);
+				help.setSize(300, 300);
+				help.setVisible(true);
+				
+				yes.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent a) {
+						help.setVisible(false);
+						help.dispose();
+					}
+				});
+				
+				no.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent a) {
+						help.setVisible(false);
+						help.dispose();
+					}
+				});
+			}
+		});
+		
+		//退出提示
+		tb.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e) {
+				System.out.print("quit!!");
+				e.getWindow().setVisible(false);
+				((Window)e.getComponent()).dispose();
+				System.exit(0);
+			}
+		});
+		
+	}
+}
