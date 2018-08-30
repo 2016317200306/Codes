@@ -1,0 +1,23 @@
+package admin;
+
+public class CalChicken {
+
+	public static void main(String[] args) {
+		int z = 0;
+		boolean isAnswer = false;
+		for(int i = 0;i <= 20;i++) {
+			for(int j = 0;j <= 33;j++) {
+				z = 100 - i - j;
+				if(z % 3 == 0 && (5 * i + 3 * j + z / 3) == 100) {
+					System.out.println("公鸡" + i + "只，母鸡" + j + "只,小鸡" + z + "只");
+					isAnswer = true;
+				}
+			}
+		}
+
+		if(!isAnswer) {
+			System.out.println("此题无解！");
+		}
+	}
+
+}
