@@ -1,0 +1,28 @@
+package admin;
+
+import java.io.*;
+
+public class OpenFile {
+
+	public static void main(String[] args) throws IOException{
+		try {
+			//创建文件输入流对象
+			FileInputStream rf = new FileInputStream("OpenFile.java");
+			int n = 512,c = 0;
+			byte[] buffer = new byte[n];
+			while((c = rf.read(buffer,0,n)) != -1) {
+				System.out.println(new String(buffer,0,c));
+			}
+			System.out.println();
+			rf.close();
+		}
+		
+		catch(IOException ioe) {
+			System.out.println(ioe);
+		}
+		
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+}
