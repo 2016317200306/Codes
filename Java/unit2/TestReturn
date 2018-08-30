@@ -1,0 +1,19 @@
+package admin;
+
+public class TestReturn {
+
+	public static void main(String[] args) {
+		int i = 10;
+		if(i < 5) {
+			return ;
+			//i = 6;
+		}
+		else {
+			//return;
+		}
+		i = 5;
+	}
+
+}
+//去掉任何一个注释都会导致错误
+//return后不能有可执行语句（可以有注释语句）
