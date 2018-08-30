@@ -1,0 +1,28 @@
+package admin;
+
+import java.io.*;
+
+public class Write1 {
+
+	public static void main(String[] args) {
+		try {
+			System.out.println("Input: ");
+			int count,n = 512;
+			byte[] buffer = new byte[n];
+			count = System.in.read(buffer);
+			//创建文件输出流对象
+			FileOutputStream wf = new FileOutputStream("Write1.txt");
+			wf.write(buffer,0,count);//开启输出流
+			wf.close();//关闭输出流
+			System.out.println("Save to Write1.txt!");
+		}
+		
+		catch(IOException ioe) {
+			System.out.println(ioe);
+		}
+		
+		catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+}
