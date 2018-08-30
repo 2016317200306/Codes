@@ -1,0 +1,19 @@
+package admin;
+
+public class TestConditionExpression {
+
+	public static void main(String[] args) {
+		float sum1 = 1.5f;
+		int num = 2;
+		System.out.println((sum1 < 2 ? 1 : num / sum1));//发生隐式数据转换
+		
+		//条件修改
+		num = 3;
+		int sum2 = 2;
+		System.out.println((sum2 < 3 ? 1 : num / sum2));
+
+		//输出的格式由表达式num/sum决定
+		//即它是整型还是浮点型
+	}
+
+}
