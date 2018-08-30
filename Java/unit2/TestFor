@@ -1,0 +1,22 @@
+package admin;
+
+public class TestFor {
+	static boolean foo(char c) {
+		System.out.println(c);
+		return true;
+	}
+
+	public static void main(String[] args) {
+		int i = 0;
+		for(foo('A');foo('B') && (i < 2);foo('C')) {
+			i++;
+			foo('D');
+		}
+
+		//此程序可以解释for循环的判定顺序
+		//先是初始化条件，再是判断，完成循环块后再是最后一个
+		//最后一遍循环会有一次判定
+		
+	}
+
+}
