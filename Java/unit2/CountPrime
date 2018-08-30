@@ -1,0 +1,29 @@
+package admin;
+
+public class CountPrime {
+
+	public static void main(String[] args) {
+		int n = 1,m,j,i;//n来计数
+		boolean h;//素数标志
+		System.out.println(2 + "\t");
+		for(i = 3;i <= 100;i += 2) {
+			m = (int)Math.sqrt(i);//找到i的平方根
+			h = true;
+			//在2和m之间遍历，如果能被j整除，那么i不是素数
+			for(j = 2;j <= m;j++) {
+				if(i % j == 0) {
+					h = false;
+					break;
+				}
+			}
+			if(h) {//找到了
+				if(n % 6 == 0) {//格式控制
+					System.out.println("");
+				}
+				System.out.println(i + "\t");
+				n++;
+			}
+		}
+	}
+
+}
