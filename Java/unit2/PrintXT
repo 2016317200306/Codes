@@ -1,0 +1,32 @@
+package admin;
+
+public class PrintXT {
+
+	public static void main(String[] args) {
+		int n = 5,colSpan = 2,colSpanBase = 2;
+		int arr[][] = new int[n][n];
+		arr[0][0] = 1;
+		//赋值
+		for(int i = 0;i < n;i++) {//i为行
+			for(int j = 0;j < n;j++) {//j为列
+				if(j == n - i - 1)	break;//对角线
+				arr[i][j + 1] = arr[i][j] + colSpan;
+				colSpan++;//列加数因子调整
+			}
+			if(i == n - 1)	break;//i为最后一行退出
+			arr[i + 1][0] = arr[i][0] + i + 1;//为下行首位赋值
+			colSpanBase++;//调整行加数因子
+			colSpan = colSpanBase;//调整列加数因子
+		}
+		//输出
+		for(int i = 0;i < n;i++) {
+			for(int j = 0;j < n;j++) {
+				System.out.print(arr[i][j]);
+				System.out.print('\t');
+				if(j == n - i - 1)	break;
+			}
+			System.out.println("");
+		}
+	}
+
+}
