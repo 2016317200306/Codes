@@ -1,0 +1,146 @@
+package test;
+
+import java.applet.*;
+import java.awt.*;
+import java.util.*;
+
+public class Clock extends Applet implements Runnable{
+	Image ImageBuffer = null;  
+	Graphics GraImage = null;  
+	
+	Thread time;
+	int r = 50;//各时钟的统一半径
+	
+	int sec_China,min_China,hour_China;
+	int sec_Russia,min_Russia,hour_Russia;
+	int sec_NewYork,min_NewYork,hour_NewYork;
+	int sec_Tokyo,min_Tokyo,hour_Tokyo;
+	int sec_London,min_London,hour_London;
+	
+	
+	public void start() {
+		time = new Thread(this);
+		time.start();
+	}
+	
+	public void paint(Graphics g) {
+		//获取当前时间
+		Date now = new Date();
+		
+		//设置中国时间
+		sec_China = now.getSeconds();
+		min_China = now.getMinutes();
+		hour_China = now.getHours();
+		
+		//设置俄罗斯时间
+		sec_Russia = now.getSeconds();
+		min_Russia = now.getMinutes();
+		hour_Russia = (now.getHours() + 19) % 24;
+		
+		//设置纽约时间
+		sec_NewYork = now.getSeconds();
+		min_NewYork = now.getMinutes();
+		hour_NewYork = (now.getHours() + 11) % 24;
+		
+		//设置东京时间
+		sec_Tokyo = now.getSeconds();
+		min_Tokyo = now.getMinutes();
+		hour_Tokyo = (now.getHours() + 1) % 24;
+		
+		//设置伦敦
+		sec_London = now.getSeconds();
+		min_London = now.getMinutes();
+		hour_London = (now.getHours() + 16) % 24;
+		
+		//画出中国时间
+		
+		for(int a = 1;a <= 12;a++) {
+			int x = (int)(100 + r * Math.sin(Math.PI / 6 * a));
+			int y = (int)(100 + r * (-Math.cos(Math.PI / 6 * a)));
+			g.drawString(a + "",x,y);
+		}
+		
+		g.drawOval(100 - r, 100 - r, 2 * r, 2 * r);//圆心(100,100)
+		g.drawLine(100, 100, (int)(100 + r * Math.sin(Math.PI / 30 * sec_China)), (int)(100 - r * Math.cos(Math.PI / 30 * sec_China)));
+		g.drawLine(100, 100, (int)(100 + (r / 2) * Math.sin(Math.PI / 30 * min_China)), (int)(100 - (r / 2) * Math.cos(Math.PI / 30 * min_China)));
+		g.drawLine(100, 100, (int)(100 + (r / 4) * Math.sin(Math.PI / 6 * hour_China)), (int)(100 - (r / 4) * Math.cos(Math.PI / 6 * hour_China)));
+		g.drawString("中国", 90, 180);
+		g.drawString(hour_China + ":" + min_China + ":" + sec_China, 90, 200);
+		
+		//画出其他时间
+		
+		//俄罗斯
+		for(int a = 1;a <= 12;a++) {
+			int x = (int)(250 + r * Math.sin(Math.PI / 6 * a));
+			int y = (int)(100 + r * (-Math.cos(Math.PI / 6 * a)));
+			g.drawString(a + "",x,y);
+		}
+		
+		g.drawOval(250 - r, 100 - r, 2 * r, 2 * r);//圆心(250,100)
+		g.drawLine(250, 100, (int)(250 + r * Math.sin(Math.PI / 30 * sec_Russia)), (int)(100 - r * Math.cos(Math.PI / 30 * sec_Russia)));
+		g.drawLine(250, 100, (int)(250 + (r / 2) * Math.sin(Math.PI / 30 * min_Russia)), (int)(100 - (r / 2) * Math.cos(Math.PI / 30 * min_Russia)));
+		g.drawLine(250, 100, (int)(250 + (r / 4) * Math.sin(Math.PI / 6 * hour_Russia)), (int)(100 - (r / 4) * Math.cos(Math.PI / 6 * hour_Russia)));
+		g.drawString("俄罗斯", 240, 180);
+		g.drawString(hour_Russia + ":" + min_Russia + ":" + sec_Russia, 240, 200);
+		
+		//纽约
+		for(int a = 1;a <= 12;a++) {
+			int x = (int)(400 + r * Math.sin(Math.PI / 6 * a));
+			int y = (int)(100 + r * (-Math.cos(Math.PI / 6 * a)));
+			g.drawString(a + "",x,y);
+		}
+		
+		g.drawOval(400 - r, 100 - r, 2 * r, 2 * r);//圆心(400,100)
+		g.drawLine(400, 100, (int)(400 + r * Math.sin(Math.PI / 30 * sec_NewYork)), (int)(100 - r * Math.cos(Math.PI / 30 * sec_NewYork)));
+		g.drawLine(400, 100, (int)(400 + (r / 2) * Math.sin(Math.PI / 30 * min_NewYork)), (int)(100 - (r / 2) * Math.cos(Math.PI / 30 * min_NewYork)));
+		g.drawLine(400, 100, (int)(400 + (r / 4) * Math.sin(Math.PI / 6 * hour_NewYork)), (int)(100 - (r / 4) * Math.cos(Math.PI / 6 * hour_NewYork)));
+		g.drawString("纽约", 390, 180);
+		g.drawString(hour_NewYork + ":" + min_NewYork + ":" + sec_NewYork, 390, 200);
+		
+		//东京
+		for(int a = 1;a <= 12;a++) {
+			int x = (int)(550 + r * Math.sin(Math.PI / 6 * a));
+			int y = (int)(100 + r * (-Math.cos(Math.PI / 6 * a)));
+			g.drawString(a + "",x,y);
+		}
+		
+		g.drawOval(550 - r, 100 - r, 2 * r, 2 * r);//圆心(550,100)
+		g.drawLine(550, 100, (int)(550 + r * Math.sin(Math.PI / 30 * sec_NewYork)), (int)(100 - r * Math.cos(Math.PI / 30 * sec_NewYork)));
+		g.drawLine(550, 100, (int)(550 + (r / 2) * Math.sin(Math.PI / 30 * min_NewYork)), (int)(100 - (r / 2) * Math.cos(Math.PI / 30 * min_NewYork)));
+		g.drawLine(550, 100, (int)(550 + (r / 4) * Math.sin(Math.PI / 6 * hour_NewYork)), (int)(100 - (r / 4) * Math.cos(Math.PI / 6 * hour_NewYork)));
+		g.drawString("东京", 540, 180);
+		g.drawString(hour_Tokyo + ":" + min_Tokyo + ":" + sec_Tokyo, 540, 200);
+		
+		//伦敦
+		for(int a = 1;a <= 12;a++) {
+			int x = (int)(700 + r * Math.sin(Math.PI / 6 * a));
+			int y = (int)(100 + r * (-Math.cos(Math.PI / 6 * a)));
+			g.drawString(a + "",x,y);
+		}
+		
+		g.drawOval(700 - r, 100 - r, 2 * r, 2 * r);//圆心(550,100)
+		g.drawLine(700, 100, (int)(700 + r * Math.sin(Math.PI / 30 * sec_London)), (int)(100 - r * Math.cos(Math.PI / 30 * sec_London)));
+		g.drawLine(700, 100, (int)(700 + (r / 2) * Math.sin(Math.PI / 30 * min_London)), (int)(100 - (r / 2) * Math.cos(Math.PI / 30 * min_London)));
+		g.drawLine(700, 100, (int)(700 + (r / 4) * Math.sin(Math.PI / 6 * hour_London)), (int)(100 - (r / 4) * Math.cos(Math.PI / 6 * hour_London)));
+		g.drawString("伦敦", 690, 180);
+		g.drawString(hour_London + ":" + min_London + ":" + sec_London, 690, 200);
+		
+	}
+	
+	public void update(Graphics g) {
+		ImageBuffer = createImage(this.getWidth(), this.getHeight());   //创建图形缓冲区  
+	    GraImage = ImageBuffer.getGraphics();       //获取图形缓冲区的图形上下文  
+	    paint(GraImage);        //用paint方法中编写的绘图过程对图形缓冲区绘图  
+	    GraImage.dispose();     //释放图形上下文资源  
+	    g.drawImage(ImageBuffer, 0, 0, this);   //将图形缓冲区绘制到屏幕上  
+	}
+	
+	public void run() {
+		while(true) {
+			try {
+				time.sleep(1000);//确保加一秒
+			}catch(InterruptedException e) {}
+			repaint();//实现钟的连续
+		}
+	}
+}
