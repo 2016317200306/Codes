@@ -1,0 +1,27 @@
+package admin;
+
+public class TestLogicSymbole {
+
+	public static void main(String[] args) {
+		int out = 10;
+		boolean b1 = false;
+		if((b1 == true) && (out += 10) == 20) {
+			System.out.println("相等，out=" + out);
+		}
+		else {
+			System.out.println("不等，out=" + out);
+		}
+
+		//条件交换，out重置
+		out = 10;
+		
+		if((out += 10) == 20 && (b1 == true)) {
+			System.out.println("相等，out=" + out);
+		}
+		else {
+			System.out.println("不等，out=" + out);
+		}
+		
+	}
+
+}
