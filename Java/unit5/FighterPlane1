@@ -1,0 +1,28 @@
+package admin;
+
+class Plane {
+	protected String name;
+	public void setName(String _name) {
+		name = _name;
+	}
+	
+	public String getName(String _name) {
+		return name;
+	}
+}
+
+class FighterPlane extends Plane {
+	private int missileNum;
+	public void setNum(int _missileNum) {
+		missileNum = _missileNum;
+	}
+	public void fire() {
+		if(missileNum > 0) {
+			System.out.println("Now fire a missile!");
+			missileNum--;
+		}
+		else {
+			System.out.println("No missile left!");
+		}
+	}
+}
