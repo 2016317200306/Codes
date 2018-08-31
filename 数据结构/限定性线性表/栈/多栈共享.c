@@ -1,0 +1,7 @@
+#include<stdio.h>
+#define M 100
+
+typedef struct {
+    int Stack[M];//栈区
+    int top[2]; //两个栈顶指示器
+}DqStack;
