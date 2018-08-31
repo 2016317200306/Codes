@@ -1,0 +1,20 @@
+package admin;
+
+//同名的静态方法和非静态方法不能覆盖
+
+class Parent {
+	void show() {
+		System.out.println("non-static method in Test!");
+	}
+}
+
+public class Son extends Parent{
+	static void show() {
+		System.out.println("覆盖非静态方法!");
+	}
+	
+	public static void main(String[] args) {
+		Son s = new Son();
+	}
+
+}
