@@ -1,0 +1,19 @@
+package test;
+
+import java.awt.*;
+
+public class Login {
+
+	public static void main(String[] args) {
+		Frame f = new Frame("User Login");//创建窗口确定标题
+		f.setSize(280, 150);
+		f.setLayout(null);//不用布局管理器来确定组件位置
+		Button b = new Button("login");
+		//b在f中的位置
+		b.setBounds((f.getWidth() - 100) / 2, (f.getHeight() - 50) / 2, 100, 50);
+		f.add(b);//加入按钮b
+		f.setBackground(Color.lightGray);//设置背景色
+		f.setVisible(true);
+	}
+
+}
