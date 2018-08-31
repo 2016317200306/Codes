@@ -1,0 +1,16 @@
+package admin;
+
+//package com.resource;
+public class FighterPlane {
+	public static String name = "su35";
+}
+
+//package com.run;
+//import com.resource.*;
+
+public class RunPlane {
+	public static void main(String[] args) {
+		System.out.println(FighterPlane.name);
+	}
+
+}
