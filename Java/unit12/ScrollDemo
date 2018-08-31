@@ -1,0 +1,17 @@
+package test;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class ScrollDemo {
+	public static void main(String args[]) {
+		Frame f = new Frame("ScrollPanel");
+		//生成一个TextArea的对象，没有滚动条
+		TextArea t = new TextArea("",10,50,TextArea.SCROLLBARS_NONE);
+		ScrollPane sp = new ScrollPane();//生成一个滚动面板sp
+		sp.add(t);//文字域加入面板中
+		f.add(sp);//面板加入框架中
+		f.pack();//调整窗口大小适应sp
+		f.setVisible(true);
+	}
+}
